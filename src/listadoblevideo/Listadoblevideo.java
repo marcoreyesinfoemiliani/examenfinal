@@ -10,12 +10,18 @@ package listadoblevideo;
  * @author admin
  */
 public class Listadoblevideo {
-
+static listaequipos leq = new listaequipos();
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+      leq.insertarequipo("Arg", 1, 2);
+       
+          leq.insertarequipo("urue", 3, 2);
+          leq.Verlista();
+          System.out.println(leq.vertamaño());
+          
+// TODO code application logic here
     }
     
 }

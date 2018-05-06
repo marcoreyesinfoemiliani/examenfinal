@@ -15,6 +15,7 @@ public class elementoequipo {
   public  int id;
   public  String nombre;
   public  int ganados;
+  
   public  elementoequipo siguiente;
   public  elementoequipo anterior;
     public elementoequipo(){

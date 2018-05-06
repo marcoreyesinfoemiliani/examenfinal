@@ -17,34 +17,36 @@ package listadoblevideo;
  * @author admin
  */
 public class listaequipos {
-    public elementoequipo primero ;
+    public elementoequipo primero ; //Nodos que hacen referencia al inicio y fin de nuestra lista
     public elementoequipo ultimo ;
-    listaequipos(){
+   
+    listaequipos(){ //Constructor de la lista, se inicia nula porque esta vacia.
     
     primero = null;
      ultimo = null;
     }
     
-    public void insertarequipo(String nombreb, int idb, int ganadosb ){
+    public void insertarequipo(String nombreb, int idb, int ganadosb ){ //Se inserta un equipo al final de la lista
     elementoequipo equipo = new elementoequipo();
     equipo.nombre = nombreb;
     equipo.id = idb;
     equipo.ganados = ganadosb;
-    if (primero == null){
+    if (primero == null){ //Se condiciona que si la lista es nula se agregue el nuevo nodo como el primero
+
     primero = equipo;
-    primero.cambiarsiguiente(null);
+   
     ultimo = primero;
-    ultimo.cambiaranterior(null);
-    }else{
+  
+    }else{ //de lo contrario se ingresa hasta el final de la lista.
     ultimo.siguiente = equipo;
-    equipo.siguiente = null;
+
     ultimo = equipo;
-    ultimo.cambiaranterior(equipo);
+    
     }
     
     
     }
-     public void insertarequipoinicio(String nombreb, int idb, int ganadosb ){
+     public void insertarequipoinicio(String nombreb, int idb, int ganadosb ){//Se inserta un equipo al inicio de la lista
     elementoequipo equipo = new elementoequipo();
     equipo.nombre = nombreb;
     equipo.id = idb;
@@ -52,54 +54,56 @@ public class listaequipos {
     if (primero == null){
     primero = equipo;
     ultimo = primero;
-    ultimo.cambiaranterior(null);
+
     }else{
-    primero.anterior = equipo;
-    primero = equipo;   }
+    primero.cambiaranterior(equipo);
+    primero = equipo;   
+    
+    }
     
     
     }
-    public listaequipos (int i){
-    
-    
-    }
-//    public String buscarequipo(int dato){
-//    elementoequipo actual = new elementoequipo();
-//    actual = primero;
-//    while(actual!=null){
-//    if (actual.id == dato){
-//    return actual.nombre;
-//    break;
-//    }else{
-//    return "No se ha encontrado";
-//    }
-//    }
-//    
-//    }
-    
-    public void Verlista(){
+    public void Verlista(){ //Método para recorrer la lista e imprimirla
     elementoequipo actual = new elementoequipo();
     actual = primero;
     while(actual != null){
-    System.out.println(actual.nombre);
+System.out.println(actual.nombre + actual.id);
     
-    actual = actual.siguiente;
+    actual = actual.siguiente; //Aca se pasa de un nodo a otro por medio del apuntador
     }
     
     }
-     public void buscar(int ida){
+    public int vertamaño(){ //Se recorre la lista para contar el numero de nodos existentes en la lista.
+    elementoequipo actual = new elementoequipo();
+    actual = primero;
+    int tamaño =1;
+    while(actual != null){
+
+    tamaño++;
+    actual = actual.siguiente; //Se da un salto entre cada nodo.
+    }
+    return tamaño;
+    }
+     public String mostrarultimo(){ // se muestran los atributos de la ultima lista
+    
+   String nombreultimo = ultimo.nombre;
+   
+    return nombreultimo;
+    }
+    
+    public void buscar(int ida){ // Se recorre la lista para buscar el nodo con el id ingresado
     elementoequipo actual = new elementoequipo();
     actual = ultimo;
-    while(actual != null){
+    while(actual != null){ //Se comparan los nodos con el nodo ingresado
         if(actual.id==ida){
     System.out.println("Encontrado");
         break;
         }
-    actual = actual.anterior;
+    actual = actual.anterior; //Se da un salto entre cada nodo.
     actual.siguiente = actual;
     }
     }
-public void modificar(int ida, int ganadosa, String nombrea){
+public void modificar(int ida, int ganadosa, String nombrea){  //Sucede lo mismo que con el buscador, pero aca se modifican los atributos cuando se encuentra el elemento.
     elementoequipo actual = new elementoequipo();
     actual = ultimo;
     while(actual != null){
@@ -108,11 +112,11 @@ public void modificar(int ida, int ganadosa, String nombrea){
        actual.ganados = ganadosa;
        break;
         }
-       actual.anterior = actual;
+       actual.anterior = actual;    //Se da un salto entre cada nodo.
        actual = actual.siguiente;
         }
 }
-public boolean  estavacia(){
+public boolean  estavacia(){ // Se comprueba si la lista esta vacia o no al verificar el primer nodo.
    
     if (primero != null){
       
@@ -122,22 +126,23 @@ public boolean  estavacia(){
     return true;
     }
 }
-public void eliminar(int id){
+public void eliminar(int id){ //Se elimina el nodo que se ingreso por medio de una busqueda
    
     elementoequipo actual = primero;
        elementoequipo anterior = null;
         while(actual!=null){
-        if(actual.id == id){
-        if(actual == primero){
+        if(actual.id == id){ // al encontrar el nodo se revisa si es el primero de la lista
+        if(actual == primero){ //Si es el primero de la lista, se corre un espacio la lista para eliminarlo
         primero = primero.siguiente;
        
-        }else{
-        anterior.siguiente = actual.siguiente;
+        }
+        else{
+        actual.anterior.siguiente = actual.siguiente; // Si el nodo no es el primero, al encontrarlo se da un salto para dejarlo sin punteros. 
         
         }
         }
        anterior = actual;
-       actual = actual.siguiente;
+       actual = actual.siguiente;    //Se da un salto entre cada nodo.
         }
 }
 
